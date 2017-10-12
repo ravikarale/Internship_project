@@ -1,0 +1,265 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>Admin</title>
+	<link rel="stylesheet" href="{% static 'css/admin/style.css' %}" type="text/css" media="all" />
+
+<script>
+(function(document) {
+	'use strict';
+
+	var LightTableFilter = (function(Arr) {
+
+		var _input;
+
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
+
+		function _filter(row) {
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('light-table-filter');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+			}
+		};
+	})(Array.prototype);
+
+	document.addEventListener('readystatechange', function() {
+		if (document.readyState === 'complete') {
+			LightTableFilter.init();
+		}
+	});
+})(document);
+</script>
+
+</head>
+<body>
+<!-- Header -->
+<div id="header">
+	<div class="shell">
+		<!-- Logo + Top Nav -->
+		<div id="top">
+			<div id="top-navigation">	
+				Welcome <a href="#"><strong>Administrator</strong></a>
+				<span>|</span>
+				<a href="#">Help</a>
+				<span>|</span>
+				<a href="#">Profile Settings</a>
+				<span>|</span>
+				<a href="{% url 'admin_logout' %}">Log out</a>
+			</div>
+		</div>
+		<!-- End Logo + Top Nav -->
+		
+		<!-- Main Nav -->
+		<div id="navigation" >
+		<div class="container">
+  			<a href="#home">Home</a>
+
+  			<div class="dropdown">
+  			<button class="dropbtn">Student Details</button>
+  			<div class="dropdown-content">
+			    <a href="{% url 'displayAdminFinal' %}">Final Year Students	</a>
+			    <a href="{% url 'displayAdminIntern' %}">Internship Students</a>
+ 			</div>
+			</div>
+
+			<div class="dropdown">
+  			<button class="dropbtn">Register Company</button>
+  			<div class="dropdown-content">
+			    <a href="#">Final Year Students	</a>
+			    <a href="#">Internship Students</a>
+ 			</div>
+			</div> 
+
+			<div class="dropdown">
+  			<button class="dropbtn">Placed Students Details</button>
+  			<div class="dropdown-content">
+			    <a href="#">Final Year Students	</a>
+			    <a href="#">Internship Students</a>
+ 			</div>
+			</div>
+			<div class="dropdown">
+  			<button class="dropbtn">PCMember_Imformation</button>
+  			<div class="dropdown-content">
+ 			<a href="{% url 'callAddMember' %}">PC_Member_Registration</a>
+ 			<a href="{% url 'addPcm' %}">PC_Member_View</a>
+  
+  		</div> 
+		</div>
+		<!-- End Main Nav -->
+	</div>
+</div>
+<!-- End Header -->
+
+<!-- Container -->
+<div id="container">
+	<div class="shell">
+		<br><br>
+		<!-- Main -->
+		<div id="main">
+			<div class="cl">&nbsp;</div>
+			
+			<!-- Content -->
+			<div id="content">
+				
+				<!-- Box -->
+				<div class="box">
+					<!-- Box Head -->
+					<div class="box-head">
+						<h2 class="left">Current Articles</h2>
+						<div class="right">
+							<label>search students</label>
+							<input type="search" class="light-table-filter" data-table="order-table" placeholder="Search">
+							
+						</div>
+					</div>
+					<!-- End Box Head -->	
+
+					<!-- Table -->
+					<div class="table">
+						<table class="order-table table" id="myTable" width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th width="1"><input type="checkbox" class="checkbox" /></th>
+								<th>Roll No</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Email-id</th>
+								<th>Course</th>
+								<th>CGPA</th>
+								<th>PlaceType</th>
+								<th>Status</th>
+							</tr>
+							<!-- <tr>
+								<td><input type="checkbox" class="checkbox" /></td>
+								<td><h3><a href="#"> consectetur.</a></h3></td>
+								<td>12.05.09</td>
+								<td><a href="#">Administrator</a></td>
+								<td><a href="#" class="ico del">Delete</a><a href="#" class="ico edit">Edit</a></td>
+							</tr> -->
+							
+						{% if adminStudents %}
+
+                      	{% for student in adminStudents %}
+                      	<tr>
+                        	<td><input  type="checkbox" id="selected" name="selected" value="{{ 	student.id }}" />
+	                            <td>{{ student.rollNo }}</td>
+	                            <td>{{ student.firstName }}</td>
+	                            <td>{{ student.lastName }}</td>
+	                            <td>{{ student.emailId }}</td>
+	                            <td>{{ student.course }}</td>
+	                            <td>{{ student.cgpa }}</td>
+	                            <td>{{ student.placeType }}</td>
+	                            <td>{{ student.status }}</td>
+	                        </td>
+                        </tr>
+                      {% endfor %}
+                    {% endif %}
+
+
+
+						</table>
+						
+						
+						<!-- Pagging -->
+						<div class="pagging">
+							<div class="left">Showing 1-12 of 44</div>
+							<div class="right">
+								<a href="#">Previous</a>
+								<a href="#">1</a>
+								<a href="#">2</a>
+								<a href="#">3</a>
+								<a href="#">4</a>
+								<a href="#">245</a>
+								<span>...</span>
+								<a href="#">Next</a>
+								<a href="#">View all</a>
+							</div>
+						</div>
+						<!-- End Pagging -->
+						
+					</div>
+					<!-- Table -->
+					
+				</div>
+				<!-- End Box -->
+				
+				
+			</div>
+			<!-- End Content -->
+			
+			<!-- Sidebar -->
+			<!-- <div id="sidebar"> -->
+				
+				<!-- Box -->
+				<!-- <div class="box"> -->
+					
+					<!-- Box Head -->
+					<!-- <div class="box-head">
+						<h2>Management</h2>
+					</div> -->
+					<!-- End Box Head-->
+					
+					<!-- <div class="box-content">
+						<a href="#" class="add-button"><span>Add new Article</span></a>
+						<div class="cl">&nbsp;</div>
+						
+						<p class="select-all"><input type="checkbox" class="checkbox" /><label>select all</label></p>
+						<p><a href="#">Delete Selected</a></p>
+						 -->
+						<!-- Sort -->
+						<!-- <div class="sort">
+							<label>Sort by</label>
+							<select class="field">
+								<option value="">Title</option>
+							</select>
+							<select class="field">
+								<option value="">Date</option>
+							</select>
+							<select class="field">
+								<option value="">Author</option>
+							</select>
+						</div> -->
+						<!-- End Sort -->
+						
+				<!-- 	</div>
+				</div> -->
+				<!-- End Box -->
+		<!-- 	</div> -->
+			<!-- End Sidebar -->
+			
+			<div class="cl">&nbsp;</div>			
+		</div>
+		<!-- Main -->
+	</div>
+</div>
+<!-- End Container -->
+
+<!-- Footer -->
+<!-- <div id="footer">
+	<div class="shell">
+		<span class="left">&copy; 2010 - CompanyName</span>
+		<span class="right">
+			Design by <a href="http://chocotemplates.com" target="_blank" title="The Sweetest CSS Templates WorldWide">Chocotemplates.com</a>
+		</span>
+	</div>
+</div> -->
+<!-- End Footer -->
+	
+</body>
+</html>

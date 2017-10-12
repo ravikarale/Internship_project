@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Member</title>        
+        <style type="text/css">
+            fieldset{
+                margin:auto;
+                width:50%; 
+                margin-top:100px;
+            }
+            table tr th{
+                padding-top:20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <fieldset>
+            <legend>Add Member</legend>
+            <!-- <form action="php_action/create.html" method="post"> -->
+            <form action="{% url 'addPcm' %}" method="POST">
+            {% csrf_token %}
+                <table cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>RollNo</th>
+                    <td><input type="text" name="rollno" placeholder="RollNo"></td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td><input type="text" name="name" placeholder="Name"/></td>
+                        
+                </tr>
+                <tr>
+                    <th>EmailAddress</th>
+                    <td><input type="text" name="emailaddress" placeholder="EmailAddress"/></td>
+                </tr>
+                <tr>
+                    <th>UserName</th>
+                    <td><input type="text" name="username" placeholder="UserName"/></td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td><input type="password" name="password" placeholder="Password"/></td>
+                </tr>
+                <br>
+                <tr>
+                <td><a href="{% url 'backToLogin' %}">Admin Home</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td><button type="submit">Save Changes</button></td>
+                    
+                    <td><button type="back">Back</button></td>
+
+                </tr>
+                
+                
+
+                
+            </table>
+            </form>
+        </fieldset>
+    </body>
+
+
+

@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Login Form</title>
+      <link rel="stylesheet" href="{% static 'css/admin/admin_login_css/style.css' %}">
+</head>
+
+<body>
+  <body>
+	<div class="login">
+		<div class="login-screen">
+			<div class="app-title">
+				<h1>Login</h1>
+			</div>
+
+<form action="{% url 'getAdminLogin' %}" method="POST">
+  {% csrf_token %}
+  <div class="login-form">
+    <div class="control-group">
+      <input type="text"  name="username" placeholder="username" id="username"/>
+     <!--  {% if some_flag %}
+        <div id="some_flag" title="Some Flag">
+         <font color="red"><p>* Username  don't match</p></font>    
+        </div>
+      {% endif %} -->
+    </div>
+    <div class="control-group">
+      <input type="password" name="password" placeholder="password" id="password"/>
+      {% if some_flag %}
+        <div  id="some_flag" title="Some Flag">
+        <font  color="red" size="2" >* Username and Password don't match</font>
+          
+        </div>
+      {% endif %}
+    </div>
+    <div>
+      <a class="login-link" href="#">Lost your password?</a>
+    </div><br>
+  <input type="submit" value="submit" />
+  </div>
+
+  
+</form>
+
+</div>
+</div>
+</body>
+  
+  
+</body>
+</html>
