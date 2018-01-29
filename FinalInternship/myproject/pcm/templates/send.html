@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<form action="{% url 'emailSend' %}" method="POST">
+ {% csrf_token %} 
+	<div>
+		To:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name="drop1"> 
+			{% for each in results %}
+				<option value="{{ each.Email }}">{{ each.CompanyName }} ({{ each.Email }})</option>
+			{% endfor %}
+		</select>												
+	</div>
+	<br>
+
+	<div>
+		subject:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea id="subject" name="subject" rows="4" cols="50"></textarea>
+	</div>
+	<br>
+	<div>
+		Message:&nbsp;&nbsp;&nbsp;<textarea rows="4" cols="50" id="msg" name="msg"></textarea>
+	</div>
+	<br>
+	<div>
+		<input type="hidden" value="{{ ch }}" name="selected_id">
+	</div>
+	<div>
+		<input type="submit"  id="send" value="Send to" > 
+	</div>
+	
+</form>
+
+</body>
+</html>

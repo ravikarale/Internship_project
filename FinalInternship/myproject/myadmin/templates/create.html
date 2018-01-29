@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add Member</title>        
+        <style type="text/css">
+            fieldset{
+                margin:auto;
+                width:60%; 
+                margin-top:100px;
+                background-color: #777777;
+                font-size: 30px;
+            }
+            table tr th{
+                padding-top:20px;
+                background-color:#777777; 
+            }
+            body {
+    background:#f9ebae;
+    font-family: Verdana, sans-serif;
+    /*font-size:11px;*/
+    /*line-height:14px;*/
+    color:#000000;
+    background-color: #B40726;
+}
+
+
+        </style>
+    </head>
+
+    <body>
+        <fieldset>
+            <legend>Add Member</legend>
+            <!-- <form action="php_action/create.html" method="post"> -->
+            <form action="{% url 'addPcm' %}" method="POST">
+            {% csrf_token %}
+                <table cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>RollNo</th>
+                    <td><input type="text" name="rollno" placeholder="RollNo"></td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td><input type="text" name="name" placeholder="Name"/></td>
+                        
+                </tr>
+                <tr>
+                    <th>EmailAddress</th>
+                    <td><input type="text" name="emailaddress" placeholder="EmailAddress"/></td>
+                </tr>
+                <tr>
+                    <th>UserName</th>
+                    <td><input type="text" name="username" placeholder="UserName"/></td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td><input type="password" name="password" placeholder="Password"/></td>
+                </tr>
+                
+                 <!-- <tr>
+                 <th>Password</th> 
+                 <td><input type="password" name="psswd" maxlength="25"></td>
+                 <tr> -->
+                    <td><button type="submit">Save Changes</button></td>
+                    <td><button type="back">Back</button></td>
+
+                </tr>
+                
+                
+
+                
+            </table>
+            </form>
+        </fieldset>
+    </body>
+
+
+
