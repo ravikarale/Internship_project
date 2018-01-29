@@ -27,7 +27,7 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['0.0.0.0','192.168.43.252','127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0',,'127.0.0.1']
 #ALLOWED_HOSTS = []
 
 
@@ -41,7 +41,7 @@ ALLOWED_HOSTS = ['0.0.0.0','192.168.43.252','127.0.0.1']
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'karaleravi1005@gmail.com'
-EMAIL_HOST_PASSWORD = 'shubhangi533'
+EMAIL_HOST_PASSWORD = '***********'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
